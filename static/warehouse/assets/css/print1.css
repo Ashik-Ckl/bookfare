@@ -1,0 +1,133 @@
+hr{
+    height: 2px !important;
+    color: #e96220;
+    opacity: 1;
+}
+.pad{
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+}
+.pad_second{
+    padding-top: 19px;
+    padding-left: 28px;
+}
+.border{
+    border: 1px solid black !important;
+    padding: 10px ;
+}
+.padding{
+    padding-left: 10px;
+}
+.size{
+    font-size: 18px;
+    font-weight: 600;
+}
+.row_margin{
+    margin-top: 15px;
+}
+.border_textarea{
+    border: 1px solid black !important;
+    padding: 10px 0px 10px 16px;
+    height: 97px;
+    width: 100%;
+}
+.row_margin_after{
+    margin-top: 45px;
+}
+.label_pad{
+    padding-right: 446px;
+}
+.row_margin_after1{
+    margin-top: 20px;
+}
+.model_pad{
+    padding-right: 256px;
+}
+.color_pad{
+    padding-right: 150px;
+}
+.wheel_pad{
+    padding-right: 158px;
+}
+.purchase_pad{
+    padding-right: 530px;
+}
+.compalints_margin{
+    margin-top: 86px;
+}
+.comp_pad{
+    padding-left: 30px;
+    
+}
+.color{
+    background-color: #bcbec0;
+}
+.border_none{
+    border: 1px solid #bcbec0 !important;
+    padding: 6px 0px 6px 16px;
+}
+.star_pad{
+    margin-top: 27px;
+    min-height: 170px;
+    
+}
+.check_pad{
+    padding-right: 100px;
+}
+.check_pad_left{
+    padding-left: 205px;
+}
+.border_none_warranty{
+    border: 1px solid #bcbec0 !important;
+    padding: 6px 0px 6px 31px;
+}
+.check_pad_left_warranty{
+    padding-left: 40px;
+}
+.section_margin{
+    margin-top: 190px;
+}
+.gutting{
+    padding-right: 167px;
+}
+.label_align{
+    display: block;
+    text-align: center;
+}
+.border_textarea_complaints{
+    border: 1px solid black !important;
+    padding: 10px 0px 10px 16px;
+    min-height: 50px;
+}
+table, td, th {
+    border: 1px solid black;
+    text-align: center;
+  }
+  th{
+      background-color: #bcbec0;
+      border: none;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table_margin{
+    margin-top: 57px;
+  }
+  .div_margin{
+      margin-left: 750px;
+  }
+  .checkbox_padding{
+      padding-left: 10px;
+  }
+  .image_width{
+    max-width: 48%;
+    margin: auto;
+    display: block;
+
+}
+.action-div{
+    min-height: 50px;
+}

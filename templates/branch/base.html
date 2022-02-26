@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+    <head>
+        <style>
+            .error{
+        color: red;
+    }
+        </style>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title></title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    
+        <!-- plugin css file  -->
+        <link rel="stylesheet" href="{% static 'warehouse/assets/plugin/datatables/responsive.dataTables.min.css' %}">
+        <link rel="stylesheet" href="{% static 'warehouse/assets/plugin/datatables/dataTables.bootstrap5.min.css' %}">
+    
+        <!-- project css file  -->
+        <link rel="stylesheet" href="{% static 'warehouse/assets/css/ebazar.style.min.css' %}">
+    </head>
+<body>
+    
+    {% include 'branch/partial/sidebar.html' %}
+    {% block content %}
+
+    {% endblock %}
+           
+</div>
+    
+</div>
+
+<!-- Jquery Core Js -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{% static 'warehouse/assets/bundles/libscripts.bundle.js' %}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<!-- Plugin Js -->
+<script src="{% static 'warehouse/assets/bundles/apexcharts.bundle.js' %}"></script>
+<script src="{% static 'warehouse/assets/bundles/dataTables.bundle.js' %}"></script>  
+{% block javascript %}
+{% endblock %}
+</body>
+</html> 

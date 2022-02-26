@@ -1,0 +1,138 @@
+@media print {
+  
+    .navbar-toggler,.sidebar,header .button .a{
+        display: none;
+        border: 1px solid black;
+    }
+    
+  }
+
+@page { size: auto;  margin: 0mm; }
+@media print{
+    .page-titles,p,h1,h2{
+        display: none;           
+    }
+    .checkbox_padding {
+        padding-left: 0px !important;
+    }
+    .gutting {
+        padding-right: 70px !important;
+    }
+
+      
+
+}
+
+@media print {
+    #btnPrint {
+      display: none;
+    }
+    #branchName{
+        display: none;
+    }
+}   
+@media print{
+    #btnBack {
+        display: none;
+    }
+}
+
+
+@media print {
+    #searchDiv {
+      display: none;
+    }
+} 
+
+@media print {
+    #logoImage {
+      display: none;
+    }
+} 
+
+
+@media (min-width: 570px) and (max-width: 620px){
+.container{
+    max-width: 95% !important;
+    box-shadow: none !important;
+}
+
+.border {
+    border: 1px solid black !important;
+    max-height: 55px;
+    min-height: 55px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.gutting {
+    padding-right: 2% !important;
+}
+
+.col-sm-1 {
+    flex: 0 0 auto;
+    width:80% !important;
+    display: flex !important;
+    padding: 0 5% !important;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+}
+
+.mb-5{
+    margin-bottom: 0 !important;
+}
+.row_margin {
+    margin-top: 2.5% !important;
+}
+.div_margin {
+    margin-left: 79% !important;
+}
+
+.label_pad {
+    padding-right: 0 !important;
+}
+.wheel_pad {
+    padding-right: 0 !important;
+}
+.color_pad {
+    padding-right: 0 !important;
+}
+.purchase_pad {
+    padding-right: inherit !important;
+}
+.border_none_warranty {
+    border: 1px solid #bcbec0 !important;
+    padding: 6px 10px 6px 31px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+.check_pad_left {
+    padding-left: 112px !important;
+}
+.checkbox_padding {
+    padding-left: 0 !important;
+}
+.bad-serv{
+    padding-right: 0% !important;
+}
+.services-badminton{
+    border: 1px solid black !important;
+    max-height: 55px;
+    min-height: 55px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-evenly !important;
+}
+.bd-cvr{
+    width: auto !important;
+}
+.border_textarea1 {
+    border: 1px solid black !important;
+    padding: 10px 0px 10px 16px;
+    height: 97px;
+    width: 103% !important;
+}
+}
+

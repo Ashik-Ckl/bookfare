@@ -1,0 +1,206 @@
+{% extends 'warehouse/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="body d-flex py-lg-3 py-md-2">
+    <div class="container-xxl">
+        <div class="row align-items-center">
+            <div class="border-0 mb-4">
+                <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                    <div class="col-lg-6">
+                        <div class="col-lg-8">
+                            <h3 class="fw-bold mb-0">Books Information</h3>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-success btn-set-task w-sm-100" id="btnManageBooks" data-bs-toggle="modal" data-bs-target="#manage-book"><i class="icofont-plus-circle me-2 fs-6"></i>Manage Books</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-auto d-flex w-sm-100">
+                    </div>
+                    <div class="col-auto d-flex w-sm-100">
+                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Books</button>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Row end  -->
+        <div class="row clearfix g-3">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table id="bookTable" class="table table-hover align-middle mb-0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Barcode Id</th>
+                                    <th>Name</th>
+                                    <th>Author</th>
+                                    <th>Now At</th> 
+                                    <th>Purchase Rate</th> 
+                                    <th>Sales Rate</th>
+                                    <th>Quantity</th>  
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Row End -->
+    </div>
+</div>
+
+<div class="modal fade" id="expadd" tabindex="-1"  aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title  fw-bold" id="dateBk"></h5>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="deadline-form">
+            <form id="bookForm">
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                        <input type="number" id="editId" value="0" hidden>
+                        <label class="form-label">Name*</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                        <label class="form-label">Bracode Id*</label>
+                        <input type="text" name="barcode" class="form-control">
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                    <label class="form-label">Author*</label>
+                    <input type="tel" name="author" class="form-control">
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-6">
+                        <label class="form-label">Purchase Rate</label>
+                        <input type="number" name="purchase_rate" class="form-control">
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="form-label">Sales Rate*</label>
+                        <input type="number" name="sales_rate" class="form-control">
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                        <label class="form-label">Quantity*</label>
+                        <input type="number" min="1" name="quantity" class="form-control">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="btnReset">Reset</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-primary">Add</button>
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+  
+</div>
+</div>
+</div>
+<div class="modal fade mge-div" id="manage-book" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h5 class="modal-title  fw-bold" id="dateBk"></h5>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-header">
+            <table class="table" id="manageBookTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Available Quantity</th>
+                    <th scope="col">Qty</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyMB">
+                </tbody>
+              </table>            
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                        <label class="form-label">Branch:</label>
+                        <select id="branch1" class="form-control valid" name="branch">
+                            <option selected disabled>--select--</option>
+                        </select>
+    
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="btnSubmitMB" class="btn btn-primary">Add</button>
+        </div>
+        
+        <div class="modal-body">
+            
+            
+        </div>
+      
+    </div>
+    </div>
+    </div>
+
+    <div class="modal fade mge-div" id="view-book" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h5 class="modal-title  fw-bold" id="dateBk"></h5>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-header">
+            <table class="table" id="manageBookViewTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyMBV">
+                </tbody>
+              </table>            
+        </div>
+        <div class="modal-body">
+            
+            
+        </div>
+      
+    </div>
+    </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+
+<script src="{% static 'warehouse/js/books.js' %}"></script>
+<script src="{% static 'warehouse/js/manage-books.js' %}"></script>
+<script src="{% static 'warehouse/js/helper.js' %}"></script>
+
+
+{% endblock %}

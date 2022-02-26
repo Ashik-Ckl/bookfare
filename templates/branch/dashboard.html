@@ -1,0 +1,70 @@
+{% extends 'branch/base.html' %}
+{% load static %}
+{% block content %}
+<div class="body d-flex py-3">
+
+
+    <div class="row clearfix g-3">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table id="bookTable" class="table table-hover align-middle mb-0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Author</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>  
+                                    <th>Transfer</th>
+                                    <!-- <th>Edit</th>
+                                    <th>Delete</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Row End -->
+        <div class="modal fade" id="expadd" tabindex="-1"  aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  fw-bold" id="dateBk"></h5>
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="deadline-form">
+                    <form id="bookForm">
+                        <div class="row g-3 mb-3">
+                            <input type="number" id="editId" hidden>
+                            <input type="text" id="qty" hidden>
+                            <div class="col-sm-12">
+                                <label class="form-label">Quantity*</label>
+                                <input type="number" min="1" name="quantity" class="form-control" required>
+                            </div>
+                        </div>
+                        <p class="error"></p>
+                        <div class="modal-footer">
+                            <button type="submit" id="btnSubmit" class="btn btn-primary">Transfer </button>
+                        </div>
+                        
+                    </form>
+                </div>
+                
+            </div>
+          
+        </div>
+        </div>
+        </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script src="{% static 'branch/dashboard.js' %}"></script>
+
+<!-- <script src="{% static 'warehouse/js/helper.js' %}"></script> -->
+
+{% endblock %}
