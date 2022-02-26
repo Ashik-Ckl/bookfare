@@ -128,7 +128,7 @@ $("#bookForm").validate({
                         }, 1500);
                         var table = $("#bookTable").DataTable();
                         var tableData = [];
-                        var id = "<input id='bkChkID' type='checkbox' value="+ response['id']+">"
+                        var id = "<input type='checkbox' id='bkChkID' class='cbCheck' value="+ response['id']+">"
                         var nowAt = '<button id="btnView" type="button" class="btn btn-outline-secondary" value=' + response["id"] + '  data-bs-toggle=""><i class="icofont-eye-alt text-primary"></i></button>' 
                         var edit = '<button id="btnEdit" type="button" class="btn btn-outline-secondary" value=' + response["id"] + '  data-bs-toggle="modal" data-bs-target="#expedit"><i class="icofont-edit text-success"></i></button>'
                         var deleteBk = '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + response["id"] + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>'
