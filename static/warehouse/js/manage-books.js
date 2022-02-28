@@ -28,13 +28,7 @@ $("#bookTable").on("change", ".cbCheck", function () {
         });
     }
     else {
-        for (var n = 0; n < data.length; n++) {
-            if (data[n].id == id) {
-                var removedObject = data.splice(n, 1);
-                removedObject = null;
-                break;
-            }
-        }
+        remvoveIds(id)
     }
 
 });
@@ -48,7 +42,7 @@ $("#btnManageBooks").click(function () {
         row.append($("<td>" + data[i].name + "</td>"));
         row.append($("<td>" + data[i].quantity + "</td>"));
         row.append($("<td><input type='number' min='1' class='input-qty inp-bk' max=" + data[i].quantity + " value=" + data[i].transfer_quantity + " id=" + data[i].id + "></td>"));
-        row.append($("<td>" + '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + data[i].id + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>' + "</td>"));
+        row.append($("<td>" + '<button id="btnDeleteMBk" type="button" class="btn btn-outline-secondary" value=' + data[i].id + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>' + "</td>"));
     }
 })
 
@@ -61,7 +55,6 @@ $('body').on('keyup', 'input[type=number]', function (e) {
             if (data[n].id == id) {
                 data[n].transfer_quantity = qty
             }
-            console.log(data)
         }
     }, 500);
 });
@@ -107,3 +100,21 @@ $("#btnSubmitMB").click(function () {
         alert('select branch')
     }
 });
+
+$(document).on('click', '#btnDeleteMBk', function () {
+    remvoveIds($(this).val())
+    $(this).closest('tr').remove();
+
+});
+
+
+
+function remvoveIds(id){
+    for (var n = 0; n < data.length; n++) {
+        if (data[n].id == id) {
+            var removedObject = data.splice(n, 1);
+            removedObject = null;
+            break;
+        }
+    }
+}

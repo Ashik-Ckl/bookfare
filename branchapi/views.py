@@ -22,7 +22,11 @@ class GetBooksToBranch(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return self.queryset.filter(branch=self.request.user.branch)
+        barcode = self.request.query_params.get('barcode')
+        if barcode != None:
+            return self.queryset.filter(book__barcode=barcode)
+        else:
+            return self.queryset.filter(branch=self.request.user.branch)
     
     def update(self,request,*args,**kwargs):
         objId = kwargs['pk']

@@ -26,7 +26,7 @@ $("#loginForm").validate({
             csrfmiddlewaretoken:csrftoken
         } 
         $.ajax({
-            url:"/branchapi/login/",
+            url:"/branchapi/token/",
             type: "POST",
             data: data,
             statusCode: {

@@ -1,0 +1,60 @@
+{% extends 'warehouse/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="body d-flex py-lg-3 py-md-2">
+    <div class="container-xxl">
+        <div class="row align-items-center">
+            <div class="border-0 mb-4">
+                <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                    <div class="col-lg-6">
+                        <div class="col-lg-8">
+                            <h3 class="fw-bold mb-0"></h3>
+                        </div>
+                    </div>
+                    <div class="col-auto d-flex w-sm-100">
+                    </div>
+                </div>
+                <form id="invoiceForm">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Scan Barcode</label>
+                      <input type="text" class="form-control" name="barcode" id="bookId" placeholder="Scan Barcode">
+                    </div>
+                    <button type="submit" class="btn btn-primary" hidden>Submit</button>
+                  </form>
+            </div>
+        </div> <!-- Row end  -->
+        <div class="row clearfix g-3">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table id="invoiceTable" class="table table-hover align-middle mb-0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Name</th>
+                                    <th>Author</th>
+                                    <th>Price</th> 
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Row End -->
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{% static 'branch/create-invoice.js' %}"></script>
+
+
+{% endblock %}
