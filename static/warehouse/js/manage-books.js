@@ -1,6 +1,5 @@
 var data = [];
 
-
 $("#bookTable").on("change", ".cbCheck", function () {
     var id = $(this).attr("value");
     if ($(this).prop('checked') == true) {

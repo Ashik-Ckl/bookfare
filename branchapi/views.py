@@ -24,7 +24,7 @@ class GetBooksToBranch(viewsets.ModelViewSet):
     def get_queryset(self):
         barcode = self.request.query_params.get('barcode')
         if barcode != None:
-            return self.queryset.filter(book__barcode=barcode)
+            return self.queryset.filter(branch=self.request.user.branch,book__barcode=barcode)
         else:
             return self.queryset.filter(branch=self.request.user.branch)
     
