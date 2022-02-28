@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.fields import CharField
 # Create your models here.
 
 
@@ -62,4 +63,16 @@ class book(models.Model):
 class transferbooks(models.Model):
     branch = models.ForeignKey(branch,on_delete=models.CASCADE)
     book = models.ForeignKey(book,on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+class customer(models.Model):
+    address = models.TextField()
+    phone = models.CharField(max_length=30,null=True,blank=True)
+    branch = models.ForeignKey(branch,null=True,blank=True,on_delete=models.CASCADE)
+
+class invoice(models.Model):
+    customer = models.ForeignKey(customer,on_delete=models.CASCADE)
+    book_name = models.CharField(max_length=200)
+    author = models.CharField(max_length=150)
+    sales_rate = models.IntegerField()
     quantity = models.IntegerField()

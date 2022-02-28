@@ -33,6 +33,8 @@ $("#bookTable").on("change", ".cbCheck", function () {
 });
 
 $("#btnManageBooks").click(function () {
+    if(data.length > 0){
+    $("#manage-book").modal('show');
     $("#tbodyMB").empty();
     for (var i = 0; i < data.length; i++) {
         var row = $("<tr />")
@@ -43,6 +45,10 @@ $("#btnManageBooks").click(function () {
         row.append($("<td><input type='number' min='1' class='input-qty inp-bk' max=" + data[i].quantity + " value=" + data[i].transfer_quantity + " id=" + data[i].id + "></td>"));
         row.append($("<td>" + '<button id="btnDeleteMBk" type="button" class="btn btn-outline-secondary" value=' + data[i].id + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>' + "</td>"));
     }
+}
+else{
+    alert('Please select books')
+}
 })
 
 
@@ -62,42 +68,53 @@ $('body').on('keyup', 'input[type=number]', function (e) {
 
 
 $("#btnSubmitMB").click(function () {
-    
-    if($("#branch1").val() != null){
-        obj = {
-            'data1':data,
-            'branch':$("#branch1").val()
+    if($("#branch1").val() != null ){
+        if(data.length > 0){
+            obj = {
+                'data1':data,
+                'branch':$("#branch1").val()
+            }
+            obj['data1'] = JSON.stringify(obj['data1'])
+            $.ajax({
+                url: "/warehouseapi/transfer-books/",
+                type: "POST",
+                data: obj,       
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                        "Authorization",
+                        "Token " + localStorage.getItem("admin_token")
+                    );
+                },
+                statusCode: {
+                    201: function (response) {
+                        bookdetails()
+                        $("#manage-book").modal('hide');
+                        swal("Poof! Transfered Successfully!", {
+                            icon: "success",
+                        });
+                        data = [];
+                       
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                  }
+        
+            });
         }
-        obj['data1'] = JSON.stringify(obj['data1'])
-        $.ajax({
-            url: "/warehouseapi/transfer-books/",
-            type: "POST",
-            data: obj,       
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader(
-                    "Authorization",
-                    "Token " + localStorage.getItem("admin_token")
-                );
-            },
-            statusCode: {
-                201: function (response) {
-                    bookdetails()
-                    $("#manage-book").modal('hide');
-                    swal("Poof! Transfered Successfully!", {
-                        icon: "success",
-                    });
-                   
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-              }
-    
-        });
+        else{
+            $("#manage-book").modal('hide');
+            swal("Poof! Please select...!", {
+                icon: "error",
+            });
+
+        }
+      
     }
     else{
         alert('select branch')
     }
+    
 });
 
 $(document).on('click', '#btnDeleteMBk', function () {

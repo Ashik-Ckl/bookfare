@@ -92,16 +92,25 @@ $("#bookForm").validate({
                         "Token " + localStorage.getItem("admin_token")
                     );
                 },
-                success: function () {
-                    $("#expadd").modal('hide');
-                    $("#bookForm").trigger("reset");
-                    swal("Poof! Updated Successfully!", {
-                        icon: "success",
-                    });
-                    setTimeout(function () {
-                        location.reload();
-                    }, 100);
-                }
+                statusCode: {
+                    200: function (response) {
+                        $("#expadd").modal('hide');
+                        $("#bookForm").trigger("reset");
+                        swal("Poof! Updated Successfully!", {
+                            icon: "success",
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 100);
+                       
+                    },
+                    400: function(){
+                        $("#expadd").modal('hide');
+                        swal("Proof! Barcode already exists" ,{
+                            icon:"error",
+                        })
+                    }
+                },
 
             });
         }
@@ -135,6 +144,12 @@ $("#bookForm").validate({
                         tableData.push([id,response['barcode'],response["name"],response["author"],nowAt,response['purchase_rate'],response['sales_rate'], response["quantity"],edit,deleteBk])
                         table.draw();
                         table.rows.add(tableData).draw();
+                    },
+                    400: function(){
+                        $("#expadd").modal('hide');
+                        swal("Proof! Barcode already exists" ,{
+                            icon:"error",
+                        })
                     }
                 }
             });
