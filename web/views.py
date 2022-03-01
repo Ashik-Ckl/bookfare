@@ -16,3 +16,6 @@ def add_user(request,pk):
 
 def book(request):
     return render(request,'warehouse/books.html')
+
+def entries(request):
+    return render (request, 'warehouse/book-transfer-details.html')

@@ -1,4 +1,12 @@
 
+
+// if($(localStorage.getItem('admin_token') != null)){
+
+// }
+// else{
+//   window.location("/")
+// }
+
 $("#logout").click(function(){
     $.ajax({
         url: "/warehouseapi/logout/",

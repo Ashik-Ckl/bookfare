@@ -2,7 +2,7 @@ from django.db.models import fields
 from rest_framework import serializers
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model,authenticate
-from warehouse.models import User,branch,book,transferbooks
+from warehouse.models import User,branch,book,transferbooks,customer,invoice
 
 
 
@@ -39,4 +39,25 @@ class AuthTokenSerializer(serializers.Serializer):
 class UpdateTransferBooks(serializers.ModelSerializer):
     class Meta:
         model = transferbooks
+        fields = '__all__'
+
+class CustomerSerializer(serializers.ModelSerializer):
+    total_amount = serializers.SerializerMethodField()
+    class Meta:
+        model = customer
+        fields = '__all__'
+        read_only_fields = ('branch',)
+    
+    def get_total_amount(self,obj):
+        total = []
+        if invoice.objects.filter(customer=obj.id).exists():
+            invoiceObjects =invoice.objects.filter(customer=obj.id)
+            for i in invoiceObjects:
+                subTotal = int(i.sales_rate) * int(i.quantity)
+                total.append(subTotal)
+            return total
+
+class InvoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = invoice
         fields = '__all__'

@@ -1,0 +1,56 @@
+{% extends 'branch/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="body d-flex py-lg-3 py-md-2">
+     <!-- Row end  -->
+        <div class="row clearfix g-3">
+            <div class="col-12">
+                <p></p>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table id="invoiceTable" class="table table-hover align-middle mb-0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Name</th>
+                                    <th>Author</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <th>Sub Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyMB">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <button type="button"id="btnSubmit"  class="btn btn-success">Print</button>
+            </div>
+        </div>
+        
+<!-- Row End -->
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="{% static 'branch/invoice.js' %}"></script>
+<script src="{% static 'branch/helper.js' %}"></script>
+
+
+
+{% endblock %}

@@ -25034,3 +25034,7 @@ div.mge-div{
   
     overflow: scroll;
   }
+.btn-print{
+    position: relative;
+    top: 23px;
+}

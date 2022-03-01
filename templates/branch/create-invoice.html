@@ -1,4 +1,4 @@
-{% extends 'warehouse/base.html' %}
+{% extends 'branch/base.html' %}
 {% load static %}
 {% block content %}
 
@@ -6,7 +6,8 @@
     <div class="container-xxl">
         <div class="row align-items-center">
             <div class="border-0 mb-4">
-                <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                <div
+                    class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                     <div class="col-lg-6">
                         <div class="col-lg-8">
                             <h3 class="fw-bold mb-0"></h3>
@@ -16,20 +17,31 @@
                     </div>
                 </div>
                 <form id="invoiceForm">
-
                     <div class="form-group">
                         <div class="row">
-                            <div cl></div>
+                            <div class="col-lg-6 ui-widget">
+                                <label for="barcode">Scan Barcode:</label>
+                                <input type="text" class="form-control" name="barcode" id="barcode"
+                                    placeholder="Scan Barcode" required>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Quantity:</label>
+                                    <input type="number" class="form-control" name="quantity" id="quantity"
+                                        placeholder="quantity" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-print">Add</button>
+                                </div>
+                            </div>
                         </div>
-                      <label for="exampleInputEmail1">Scan Barcode</label>
-                      <input type="text" class="form-control" name="barcode" id="bookId" placeholder="Scan Barcode" required        >
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Quantity</label>
-                        <input type="number" class="form-control" value="1" name="quantity" placeholder="quantity" required>
-                      </div>
-                    <button type="submit" class="btn btn-primary" hidden>Submit</button>
-                  </form>
+                        <p class="error"></p>
+                    </div>
+                   
+                </form>
             </div>
         </div> <!-- Row end  -->
         <div class="row clearfix g-3">
@@ -39,10 +51,11 @@
                         <table id="invoiceTable" class="table table-hover align-middle mb-0" style="width:100%">
                             <thead>
                                 <tr>
+                                    <th>Barcode</th>
                                     <th>Name</th>
                                     <th>Quantity</th>
-                                    <th>Rate</th> 
-                                    <th>Sub Total</th> 
+                                    <th>Rate</th>
+                                    <th>Sub Total</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -52,7 +65,54 @@
                     </div>
                 </div>
             </div>
-        </div><!-- Row End -->
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <button type="button"id="btnSubmit"  class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="expadd" tabindex="-1"  aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title  fw-bold" id="dateBk"></h5>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="deadline-form">
+            <form id="customerForm">
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                        <input type="number" id="editId" value="0" hidden>
+                        <label class="form-label">Adress*</label>
+                        <textarea type="text" name="address" class="form-control" required></textarea>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-sm-12">
+                    <label class="form-label">Phone*</label>
+                    <input type="tel" name="phone" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+  
+</div>
+</div>
+</div><!-- Row End -->
     </div>
 </div>
 
@@ -61,8 +121,13 @@
 {% endblock %}
 
 {% block javascript %}
-
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+rel = "stylesheet">
+<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="{% static 'branch/create-invoice.js' %}"></script>
+<script src="{% static 'branch/helper.js' %}"></script>
+
 
 
 {% endblock %}

@@ -1,6 +1,7 @@
 $("#bookTable").DataTable();
 
 $(document).ready(function () {
+    $("#updateStock").hide();
     return bookdetails()
 });
 
@@ -15,6 +16,7 @@ function bookdetails(){
             );
         },
         success: function (response) {
+            console.log(response)
             var table = $("#bookTable").DataTable();
             table.clear();
             drawTable(response);
@@ -27,16 +29,29 @@ function bookdetails(){
             function drawRow(rowData) {
                 var tableData = [];
                 var id = ''
+                var deleteBk 
+                var trackall 
                 if (rowData['quantity'] != 0){
                     var id = "<input type='checkbox' id='bkChkID' class='cbCheck' value="+ rowData['id']+">"
                 }
                 else{
                     var id = "<input type='checkbox' id='bkChkID' class='cbCheck' disabled value="+ rowData['id']+">"
                 }
+                if(rowData['stock'] != false){
+                    var deleteBk = '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow" disabled><i class="icofont-ui-delete text-danger"></i></button>'
+                }
+                else{
+                    var deleteBk = '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>'
+                }
+                if(rowData['entry'] != false){
+                    var trackall = '<a href="/transfer-history/?book_id='+rowData['id']+'&stock='+rowData['quantity']+'"><button type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow"><i class="icofont-eye-alt text-primary"></i></button></a>'
+                }
+                else{
+                    var trackall = ''
+                }
                 var nowAt = '<button id="btnView" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + '  data-bs-toggle=""><i class="icofont-eye-alt text-primary"></i></button>' 
                 var edit = '<button id="btnEdit" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + '  data-bs-toggle="modal" data-bs-target="#expedit"><i class="icofont-edit text-success"></i></button>'
-                var deleteBk = '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>'
-                tableData.push([id,rowData['barcode'],rowData["name"],rowData["author"],nowAt,rowData['purchase_rate'],rowData['sales_rate'], rowData["quantity"],edit,deleteBk])
+                tableData.push([id,rowData['barcode'],rowData["name"],rowData["author"],nowAt,rowData['purchase_rate'],rowData['sales_rate'], rowData["quantity"],trackall,edit,deleteBk])
                 table.draw();
                 table.rows.add(tableData).draw();
             }
@@ -79,6 +94,10 @@ $("#bookForm").validate({
         }
     },
     submitHandler: function (e) {
+        $("#availableQuantity").prop('disabled', false);
+        var previousQuantity = $('input[name=quantity]').val();
+        var newStock = $("input[name=newStock]").val();
+        $('input[name=quantity]').val(parseInt(previousQuantity) + parseInt(newStock))
         var data = $(e).serializeArray();
         var editId = $("#editId").val();
         if (editId != 0) {
@@ -92,16 +111,27 @@ $("#bookForm").validate({
                         "Token " + localStorage.getItem("admin_token")
                     );
                 },
-                success: function () {
-                    $("#expadd").modal('hide');
-                    $("#bookForm").trigger("reset");
-                    swal("Poof! Updated Successfully!", {
-                        icon: "success",
-                    });
-                    setTimeout(function () {
-                        location.reload();
-                    }, 100);
-                }
+                statusCode: {
+                    200: function (response) {
+                        $("#expadd").modal('hide');
+                        $("#bookForm").trigger("reset");
+                        swal("Poof! Updated Successfully!", {
+                            icon: "success",
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                        $("#updateStock").hide();
+                        addEntry(response['id'],response['quantity'],'Book Updated')
+                    },
+                    400: function(){
+                        $('.error').html('Barcode alerady exists')
+                        // $("#expadd").modal('hide');
+                        // swal("Proof! Barcode already exists" ,{
+                        //     icon:"error",
+                        // })
+                    }
+                },
 
             });
         }
@@ -118,6 +148,7 @@ $("#bookForm").validate({
                 },
                 statusCode: {
                     201: function (response) {
+                        $('.error').html('')
                         $("#expadd").modal('hide');
                         swal("Poof! Created Successfully!", {
                             icon: "success",
@@ -125,16 +156,25 @@ $("#bookForm").validate({
                         $("#bookForm").trigger("reset");
                         setTimeout(function () {
                             $("#successAlert").hide();
-                        }, 1500);
+                        }, 1500);                       
+                        var trackall = '<a href="/transfer-history/?book_id='+rowData['id']+'"<button type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow" disabled><i class="icofont-eye-alt text-primary"></i></button></a>'
                         var table = $("#bookTable").DataTable();
                         var tableData = [];
                         var id = "<input type='checkbox' id='bkChkID' class='cbCheck' value="+ response['id']+">"
                         var nowAt = '<button id="btnView" type="button" class="btn btn-outline-secondary" value=' + response["id"] + '  data-bs-toggle=""><i class="icofont-eye-alt text-primary"></i></button>' 
                         var edit = '<button id="btnEdit" type="button" class="btn btn-outline-secondary" value=' + response["id"] + '  data-bs-toggle="modal" data-bs-target="#expedit"><i class="icofont-edit text-success"></i></button>'
                         var deleteBk = '<button id="btnDelete" type="button" class="btn btn-outline-secondary" value=' + response["id"] + ' deleterow"><i class="icofont-ui-delete text-danger"></i></button>'
-                        tableData.push([id,response['barcode'],response["name"],response["author"],nowAt,response['purchase_rate'],response['sales_rate'], response["quantity"],edit,deleteBk])
+                        tableData.push([id,response['barcode'],response["name"],response["author"],nowAt,response['purchase_rate'],response['sales_rate'], response["quantity"],trackall,edit,deleteBk])
                         table.draw();
                         table.rows.add(tableData).draw();
+                        addEntry(response['id'],response['quantity'],'Book created')
+                    },
+                    400: function(){
+                        $('.error').html('Barcode alerady exists')
+                        // $("#expadd").modal('hide');
+                        // swal("Proof! Barcode already exists" ,{
+                        //     icon:"error",
+                        // })
                     }
                 }
             });
@@ -162,7 +202,6 @@ $(document).on('click', '#btnEdit', function () {
     $("#expadd").modal('show');
     $("#btnSubmit").html('Update')
 });
-
 
 $(document).on('click', '#btnDelete', function () {
     swal({
@@ -200,11 +239,9 @@ $(document).on('click', '#btnDelete', function () {
 });
 
 $("#btnReset").click(function () {
-    $("#branchForm").trigger("reset");
+    $("#bookForm").trigger("reset");
+    $('.error').html('')
 });
-
-
-
 
 $(document).ready(function(){
     $.ajax({
@@ -233,6 +270,11 @@ $(document).ready(function(){
 })
 
 
+$(document).on('click', '#btnEdit', function () {
+    $("#availableQuantity").prop('disabled', true)
+    $("#updateStock").show();
+});
+
 $(document).on('click', '#btnView', function () {
     $.ajax({
         url: "/warehouseapi/api/transfer-books-get/?book_id="+$(this).val(),
@@ -244,6 +286,12 @@ $(document).on('click', '#btnView', function () {
             );
         },
         success: function (response) {
+            if(response.length === 0){
+                $(".view-alertp").html('Not assigned to any mela')
+            }
+            else{
+                $(".view-alertp").html('')
+            }
             $("#tbodyMBV").empty();
             for(var i =0 ; i<response.length; i++){
                 var row = $("<tr />")
@@ -256,3 +304,37 @@ $(document).on('click', '#btnView', function () {
         }
     });
 });
+
+$("#btnAddBook").click(function(){
+    $("#availableQuantity").prop('disabled', false)
+    $("#updateStock").hide();
+    $("#bookForm").trigger("reset");
+    $('.error').html('')
+});
+
+$("#barcode").keyup(function(){
+    $('.error').html('')
+});
+
+
+function addEntry(bookId,stock,entry){
+    obj = {
+        'book':bookId,
+        'transfer_type':entry,
+        'stock':stock,
+    }
+    $.ajax({
+        url: "/warehouseapi/api/book-entries/",
+        type: "POST",
+        data:obj,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+                "Authorization",
+                "Token " + localStorage.getItem("admin_token")
+            );
+        },
+        success: function (response) {
+        }
+    });
+}
+

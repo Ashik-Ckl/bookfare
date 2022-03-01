@@ -20,7 +20,8 @@ router = DefaultRouter()
 
 router.register('branch',views.Branch)
 router.register('book',views.Book),
-router.register('transfer-books-get',views.TransferBooksGet)
+router.register('transfer-books-get',views.TransferBooksGet),
+router.register('book-entries',views.BookEntries)
 
 urlpatterns = [
    path('api/',include(router.urls)),

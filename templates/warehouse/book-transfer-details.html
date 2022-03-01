@@ -1,0 +1,33 @@
+{% extends 'warehouse/base.html' %}
+{% load static %}
+{% block content %}
+<div class="body d-flex py-3">
+    <h3 id="stock"></h3>
+
+    <div class="row clearfix g-3">
+            <div class="col-sm-12">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <table id="entryDetails" class="table table-hover align-middle mb-0" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Entry</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Row End -->
+</div>
+{% endblock %}
+{% block javascript %}
+
+<script src="{% static 'warehouse/js/helper.js' %}"></script>
+<script src="{% static 'warehouse/js/book-transfer-details.js' %}"></script>
+
+{% endblock %}

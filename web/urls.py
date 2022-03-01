@@ -7,4 +7,5 @@ urlpatterns = [
     path('branches/',views.branch),
     path('add-user/<str:pk>/',views.add_user),
     path('books/',views.book),
+    path('transfer-history/',views.entries)
 ]

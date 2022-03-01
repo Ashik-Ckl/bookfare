@@ -12,14 +12,14 @@
                             <h3 class="fw-bold mb-0">Books Information</h3>
                         </div>
                         <div class="col-lg-4">
-                            <button type="button" class="btn btn-success btn-set-task w-sm-100" id="btnManageBooks" data-bs-toggle="modal" data-bs-target="#manage-book"><i class="icofont-plus-circle me-2 fs-6"></i>Manage Books</button>
+                            <button type="button" class="btn btn-success btn-set-task w-sm-100" id="btnManageBooks" data-bs-toggle="modal" data-bs-target="#"><i class="icofont-plus-circle me-2 fs-6"></i>Manage Books</button>
                         </div>
                     </div>
                     
                     <div class="col-auto d-flex w-sm-100">
                     </div>
                     <div class="col-auto d-flex w-sm-100">
-                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#expadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Books</button>
+                        <button type="button" class="btn btn-primary btn-set-task w-sm-100" id="btnAddBook" data-bs-toggle="modal" data-bs-target="#expadd"><i class="icofont-plus-circle me-2 fs-6"></i>Add Books</button>
                     </div>
                 </div>
             </div>
@@ -39,6 +39,7 @@
                                     <th>Purchase Rate</th> 
                                     <th>Sales Rate</th>
                                     <th>Quantity</th>  
+                                    <th>Stock</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -74,7 +75,7 @@
                 <div class="row g-3 mb-3">
                     <div class="col-sm-12">
                         <label class="form-label">Bracode Id*</label>
-                        <input type="text" name="barcode" class="form-control">
+                        <input type="text" id="barcode" name="barcode" class="form-control">
                     </div>
                 </div>
                 <div class="row g-3 mb-3">
@@ -98,10 +99,16 @@
                 <div class="row g-3 mb-3">
                     <div class="col-sm-12">
                         <label class="form-label">Quantity*</label>
-                        <input type="number" min="1" name="quantity" class="form-control">
-
+                        <input type="number" id="availableQuantity" min="1" name="quantity" class="form-control">
                     </div>
                 </div>
+                <div class="row g-3 mb-3" id="updateStock">
+                    <div class="col-sm-12">
+                        <label class="form-label">Update Stock*</label>
+                        <input type="number" value="0" min="0" name="newStock" class="form-control">
+                    </div>
+                </div>
+                <p class="error"></p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="btnReset">Reset</button>
                     <button type="submit" id="btnSubmit" class="btn btn-primary">Add</button>
@@ -140,18 +147,15 @@
         </div>
         <div class="container">
             <div class="row">
-
                 <div class="row g-3 mb-3">
                     <div class="col-sm-12">
                         <label class="form-label">Branch:</label>
                         <select id="branch1" class="form-control valid" name="branch">
                             <option selected disabled>--select--</option>
                         </select>
-    
                     </div>
                 </div>
             </div>
-           
         </div>
         <div class="modal-footer">
             <button type="submit" id="btnSubmitMB" class="btn btn-primary">Add</button>
@@ -185,10 +189,10 @@
                 </thead>
                 <tbody id="tbodyMBV">
                 </tbody>
-              </table>            
+              </table> 
         </div>
         <div class="modal-body">
-            
+            <p class="text-center view-alertp"></p>
             
         </div>
       

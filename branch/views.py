@@ -11,3 +11,9 @@ def dashboard(request):
 
 def create_invoice(request):
     return render(request, 'branch/create-invoice.html')
+
+def invoices(request):
+    return render(request, 'branch/view_invoice.html')
+
+def view_invoice(request):
+    return render(request, 'branch/invoice.html')
