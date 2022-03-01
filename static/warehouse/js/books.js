@@ -16,7 +16,6 @@ function bookdetails(){
             );
         },
         success: function (response) {
-            console.log(response)
             var table = $("#bookTable").DataTable();
             table.clear();
             drawTable(response);
@@ -157,7 +156,7 @@ $("#bookForm").validate({
                         setTimeout(function () {
                             $("#successAlert").hide();
                         }, 1500);                       
-                        var trackall = '<a href="/transfer-history/?book_id='+rowData['id']+'"<button type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + ' deleterow" disabled><i class="icofont-eye-alt text-primary"></i></button></a>'
+                        var trackall = '<a href="/transfer-history/?book_id='+response['id']+'&stock='+response['quantity']+'"<button type="button" class="btn btn-outline-secondary" value=' + response["id"] + ' deleterow" disabled><i class="icofont-eye-alt text-primary"></i></button></a>'
                         var table = $("#bookTable").DataTable();
                         var tableData = [];
                         var id = "<input type='checkbox' id='bkChkID' class='cbCheck' value="+ response['id']+">"

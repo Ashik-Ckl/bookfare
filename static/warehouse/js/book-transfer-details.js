@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var table = $("#entryDetails").DataTable();
     var searchParams = new URLSearchParams(window.location.search)
     var book_id = searchParams.get('book_id')
     var stock = searchParams.get('stock')
@@ -10,17 +9,26 @@ $(document).ready(function(){
         beforeSend: function (xhr) {
             xhr.setRequestHeader(
                 "Authorization",
-                "Token " + localStorage.getItem("token")
+                "Token " + localStorage.getItem("admin_token")
             );
         },
         success: function (data) {
-            tableData = [];
-            for (var i = 0; i < data.length; i++) {
-                tableData.push([data[i].date,data[i].transfer_type,data[i].stock])
+            var table = $("#entryDetails").DataTable();
+            table.clear();
+            drawTable(data);
+            function drawTable(data) {
+                for (var i = 0; i < data.length; i++) {
+                    drawRow(data[i]);
+                }
+
+            }
+            function drawRow(rowData) {
+                var tableData = [];
+                tableData.push([rowData['date'],rowData['transfer_type'],rowData['stock']])
                 table.draw();
                 table.rows.add(tableData).draw();
                
-            }
+        }
         }
     });
 });

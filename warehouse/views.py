@@ -4,7 +4,7 @@ from rest_framework.settings import api_settings
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from . serializer import AuthTokenSerializer,AdminUser,BranchSerailizer,BookSerializer,TransferbooksSerializer,GetTransferbooksSerializer,UserSerializer,GetBooksQuantity,BookEntriesSerializer
+from . serializer import AuthTokenSerializer,AdminUser,BranchSerailizer,BookSerializer,TransferbooksSerializer,GetTransferbooksSerializer,UserSerializer,GetBooksQuantity,BookEntriesSerializer,GetBookEntriesSerializer
 from . models import branch,book,transferbooks,book_transfer_details
 from rest_framework import generics
 from rest_framework import status, viewsets
@@ -114,6 +114,8 @@ class BookEntries(viewsets.ModelViewSet):
         return self.queryset.filter(book=bookId)
 
     def get_serializer_class(self):
+        if self.action == 'list':
+            return GetBookEntriesSerializer
         return BookEntriesSerializer
     
 

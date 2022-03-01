@@ -31,6 +31,7 @@ class GetBooksToBranch(viewsets.ModelViewSet):
             return self.queryset.filter(branch=self.request.user.branch)
     
     def update(self,request,*args,**kwargs):
+        print(self.request.user.branch.name)
         objId = kwargs['pk']
         trObjects = transferbooks.objects.get(id=objId)
         trObjects.quantity = int(trObjects.quantity) - int(self.request.POST['quantity'])
@@ -38,11 +39,13 @@ class GetBooksToBranch(viewsets.ModelViewSet):
         updateBookQuantity = book.objects.get(id=trObjects.book_id)
         updateBookQuantity.quantity = int(updateBookQuantity.quantity) + int(self.request.POST['quantity'])
         updateBookQuantity.save()
+        print(trObjects.book_id)
         bookEntry = book_transfer_details()
         bookEntry.book_id = trObjects.book_id
         bookEntry.transfer_type = 'Transfered to warehouse from '+self.request.user.branch.name +' branch'
         bookEntry.stock = self.request.POST['quantity']
         bookEntry.save()
+        print('*'*10,bookEntry.id)
         if trObjects.quantity <= 0:
             trDelObjects = transferbooks.objects.get(id=objId)
             trDelObjects.delete()

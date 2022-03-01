@@ -110,6 +110,11 @@ class GetBooksQuantity(serializers.ModelSerializer):
         return clients
 
 class BookEntriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = book_transfer_details
+        fields = '__all__'
+
+class GetBookEntriesSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
     class Meta:
         model = book_transfer_details
