@@ -7,4 +7,5 @@ urlpatterns = [
     path('create-invoice/',views.create_invoice),
     path('invoices/',views.invoices),
     path('invoice/',views.view_invoice),
+    path('print-invoice/',views.print_invoice),
 ]

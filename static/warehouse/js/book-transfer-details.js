@@ -24,7 +24,12 @@ $(document).ready(function(){
             }
             function drawRow(rowData) {
                 var tableData = [];
-                tableData.push([rowData['date'],rowData['transfer_type'],rowData['stock']])
+                if(rowData['quantity'] != false){
+                    tableData.push([rowData['date'],rowData['transfer_type'],'',rowData['stock']])
+                }
+                else{
+                    tableData.push([rowData['date'],rowData['transfer_type'],rowData['stock'],''])
+                }
                 table.draw();
                 table.rows.add(tableData).draw();
                

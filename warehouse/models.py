@@ -81,5 +81,6 @@ class invoice(models.Model):
 class book_transfer_details(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     book = models.ForeignKey(book, on_delete=models.CASCADE)
+    quantity = models.BooleanField(default=False,null=True)
     transfer_type = models.CharField(max_length=200)
     stock = models.IntegerField() 

@@ -44,6 +44,7 @@ class GetBooksToBranch(viewsets.ModelViewSet):
         bookEntry.book_id = trObjects.book_id
         bookEntry.transfer_type = 'Transfered to warehouse from '+self.request.user.branch.name +' branch'
         bookEntry.stock = self.request.POST['quantity']
+        bookEntry.quantity = True
         bookEntry.save()
         print('*'*10,bookEntry.id)
         if trObjects.quantity <= 0:

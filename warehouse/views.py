@@ -87,6 +87,7 @@ class TransferBooks(APIView):
                 bookEntry.book_id = dic['id']
                 bookEntry.transfer_type = 'Transfered to '+branchName.name+' branch'
                 bookEntry.stock = dic['transfer_quantity']
+                bookEntry.quantity = True
                 bookEntry.save()
             else:
                 saveTRBook = transferbooks()
@@ -98,6 +99,7 @@ class TransferBooks(APIView):
                 bookEntry.book_id = dic['id']
                 bookEntry.transfer_type = 'Transfered to '+branchName.name +' branch'
                 bookEntry.stock = dic['transfer_quantity']
+                bookEntry.quantity = True
                 bookEntry.save()
 
         return Response({'msg':'success'},status=status.HTTP_201_CREATED)

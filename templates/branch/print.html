@@ -1,0 +1,60 @@
+{% extends 'branch/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{%static 'warehouse/assets/css/print1.css' %}">
+
+<div class="body d-flex py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="box">
+                    <div class="logo">
+                        <img src="{% static 'warehouse/assets/images/wisdom pusthakamela-logo.png' %}" alt=""
+                            class="d-block mx-auto" style="max-width: 30%;">
+                    </div>
+
+                    <div class="address text-center">
+                        <p class="adrs">
+                            Wisdom Islamic Youth Organization <br>
+                            CV.Complex, PV.Swami Road 
+                            PO.Chalappuram <br>
+                            PIN - 673002
+                            Kozhikode <br>
+                            PH: 04954019437
+
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-section">
+                    <table class="table  table-bordered" id="invoiceTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock %}
+{% block javascript %}
+
+<script src="{% static 'branch/helper.js' %}"></script>
+<script src="{% static 'branch/print.js' %}"></script>
+
+
+{% endblock %}

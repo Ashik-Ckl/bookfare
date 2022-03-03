@@ -76,6 +76,7 @@ function addData(barcode,id,book,author,book_id,rate){
 
 }
 function viewTable (){
+    console.log(data)
     totalSum = [];
     $("#invoiceForm").trigger("reset");
     $("#tbodyMB").empty();
@@ -188,7 +189,8 @@ function createInvoice(customer){
                         break;
                    
                       case "catch":
-                        window.location('/branch/print/')
+                        window.location.href = '/branch/print-invoice/?invoice_no='+customer
+
                     }
                   });
                   data = [];

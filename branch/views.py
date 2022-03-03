@@ -17,3 +17,6 @@ def invoices(request):
 
 def view_invoice(request):
     return render(request, 'branch/invoice.html')
+
+def print_invoice(request):
+    return render (request, 'branch/print.html')
