@@ -27,13 +27,13 @@ function invoices(){
             function drawRow(rowData) {
                 var count = 1;
                 var tableData = [];
-                var invoiceNumber = 'WBF'+rowData['id']
+                var invoiceNumber = 'WBF00'+rowData['id']
                 var sumTotal = rowData['total_amount'].reduce(function(a, b){
                     return a + b;
                 }, 0);
                 var tootal = '00'+sumTotal
                 var view = '<a href="/branch/invoice/?invoice_no='+rowData['id']+'"><button id="btnEdit" type="button" class="btn btn-outline-secondary" value=' + rowData["id"] + '  data-bs-toggle="modal" data-bs-target="#expadd"><i class="icofont-eye-alt text-primary"></i></button></a>'
-                tableData.push([invoiceNumber,rowData['address'],rowData['phone'],sumTotal,view])
+                tableData.push([rowData['date'],invoiceNumber,rowData['address'],rowData['phone'],sumTotal,view])
                 table.draw()
                 table.rows.add(tableData).draw();
                 

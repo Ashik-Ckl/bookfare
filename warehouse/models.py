@@ -66,11 +66,13 @@ class transferbooks(models.Model):
     quantity = models.IntegerField()
 
 class customer(models.Model):
+    date = models.DateTimeField(auto_now_add=True,null=True,blank=True)
     address = models.TextField()
     phone = models.CharField(max_length=30,null=True,blank=True)
     branch = models.ForeignKey(branch,null=True,blank=True,on_delete=models.CASCADE)
 
 class invoice(models.Model):
+    date = models.DateTimeField(auto_now_add=True,null=True,blank=True)
     customer = models.ForeignKey(customer,on_delete=models.CASCADE)
     barcode = models.CharField(max_length=100)
     book_name = models.CharField(max_length=200)

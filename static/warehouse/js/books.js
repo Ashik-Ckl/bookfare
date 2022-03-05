@@ -121,7 +121,7 @@ $("#bookForm").validate({
                             location.reload();
                         }, 1000);
                         $("#updateStock").hide();
-                        addEntry(response['id'],response['quantity'],'Book Updated')
+                        addEntry(response['id'],response['quantity'],'Stock added')
                     },
                     400: function(){
                         $('.error').html('Barcode alerady exists')

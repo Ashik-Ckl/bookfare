@@ -4,7 +4,7 @@ from rest_framework.settings import api_settings
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from . serializer import AuthTokenSerializer,UpdateTransferBooks,CustomerSerializer,InvoiceSerializer
+from . serializer import AuthTokenSerializer,UpdateTransferBooks,CustomerSerializer,InvoiceSerializer,CreateCustomer
 from warehouse.models import branch,book,transferbooks,customer,invoice,book_transfer_details
 from warehouse.serializer import GetTransferbooksSerializer
 from rest_framework import status, viewsets
@@ -70,8 +70,9 @@ class Customer(viewsets.ModelViewSet):
         serializer.save(branch=self.request.user.branch)
 
     def get_serializer_class(self):
+        if self.action == 'create':
+            return CreateCustomer
         return CustomerSerializer
-
 
 class CreateInvoice(APIView):
     authentication_classes = (TokenAuthentication,)

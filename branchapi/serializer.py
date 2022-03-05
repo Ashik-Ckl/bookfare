@@ -41,7 +41,14 @@ class UpdateTransferBooks(serializers.ModelSerializer):
         model = transferbooks
         fields = '__all__'
 
+class CreateCustomer(serializers.ModelSerializer):
+    class Meta:
+        model = customer
+        fields = '__all__'
+        read_only_fields = ('branch',)
+
 class CustomerSerializer(serializers.ModelSerializer):
+    date = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S")
     total_amount = serializers.SerializerMethodField()
     class Meta:
         model = customer
