@@ -1,6 +1,6 @@
 var data = [];
 $("#invoiceForm").submit(function(){
-    var barcode = $('input[name=barcode]').val();
+    var barcode = $('#barcode').val();
     var quantity = $('input[name=quantity]').val();
     $.ajax({
         url: "/branchapi/api/get-books/?barcode=" + barcode,
@@ -76,7 +76,6 @@ function addData(barcode,id,book,author,book_id,rate){
 
 }
 function viewTable (){
-    console.log(data)
     totalSum = [];
     $("#invoiceForm").trigger("reset");
     $("#tbodyMB").empty();
@@ -231,16 +230,37 @@ $("#barcode").keyup(function(){
                 }
             }
             function drawRow(rowData) {
-               datas.push(rowData.book["barcode"])
-                
+               datas.push({'barcode':rowData.book["barcode"],'name':rowData.book['barcode']})
+               datas.push({'barcode':rowData.book["barcode"],'name':rowData.book['name']})
+
             }
             autoCompletes(datas)
         }
     });
 });
-
 function autoCompletes(datas){
-    $("#barcode").autocomplete({
-        source: datas,
-    });
+$('#barcode').autocomplete({
+source: function (request, response) {
+	   response($.map(datas, function (value, key) {
+	   			var name = value.name.toUpperCase()
+			if(name.indexOf(request.term.toUpperCase()) != -1){
+				label = value.name;
+                return {
+                    label: value.name,
+                    value: value.barcode
+                }
+			}else{
+				return null;
+			}
+		}));
+
+},    
+	
+	 select: function(event, ui) {
+	  }
+					
+});
+
+  
 }
+
